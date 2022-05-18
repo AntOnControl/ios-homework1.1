@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		632C647F2835899B00047D17 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C647E2835899B00047D17 /* ProfileHeaderView.swift */; };
 		63B07FEA2829762A0047BCB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B07FE92829762A0047BCB7 /* AppDelegate.swift */; };
 		63B07FEC2829762A0047BCB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B07FEB2829762A0047BCB7 /* SceneDelegate.swift */; };
 		63B07FEE2829762A0047BCB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B07FED2829762A0047BCB7 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		632C647E2835899B00047D17 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		63B07FE62829762A0047BCB7 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B07FE92829762A0047BCB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63B07FEB2829762A0047BCB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		632C647D2835893600047D17 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				63B080002829A0A20047BCB7 /* ProfileViewController.swift */,
+				632C647E2835899B00047D17 /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		63B07FDD2829762A0047BCB7 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +75,7 @@
 		63B07FE82829762A0047BCB7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				632C647D2835893600047D17 /* Profile */,
 				63B07FE92829762A0047BCB7 /* AppDelegate.swift */,
 				63B07FEB2829762A0047BCB7 /* SceneDelegate.swift */,
 				63B07FED2829762A0047BCB7 /* ViewController.swift */,
@@ -71,7 +83,6 @@
 				63B07FF42829762B0047BCB7 /* LaunchScreen.storyboard */,
 				63B07FF72829762B0047BCB7 /* Info.plist */,
 				63B07FFE2829A0650047BCB7 /* FeedViewController.swift */,
-				63B080002829A0A20047BCB7 /* ProfileViewController.swift */,
 				63B080022829ACF00047BCB7 /* PostViewController.swift */,
 				63B080042829B3370047BCB7 /* Post.swift */,
 				63B080062829B9EE0047BCB7 /* InfoViewController.swift */,
@@ -153,6 +164,7 @@
 				63B07FEE2829762A0047BCB7 /* ViewController.swift in Sources */,
 				63B07FEA2829762A0047BCB7 /* AppDelegate.swift in Sources */,
 				63B080012829A0A20047BCB7 /* ProfileViewController.swift in Sources */,
+				632C647F2835899B00047D17 /* ProfileHeaderView.swift in Sources */,
 				63B07FFF2829A0650047BCB7 /* FeedViewController.swift in Sources */,
 				63B080052829B3370047BCB7 /* Post.swift in Sources */,
 				63B080072829B9EE0047BCB7 /* InfoViewController.swift in Sources */,

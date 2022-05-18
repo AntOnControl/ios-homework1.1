@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
         NSLayoutConstraint.activate([
             postButtom.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             postButtom.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        ]) 
     }
     
     @objc func openPost() {
