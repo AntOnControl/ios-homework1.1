@@ -20,14 +20,46 @@ class ProfileHeaderView: UIView {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Утин Антон rehthte erth etrher"
+        label.text = "Hipster Cat"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = UIColor.black
         return label
     }()
+    
+    private lazy var nameLabel2: UILabel = {
+        let label = UILabel()
+        label.text = "Waiting for something..."
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        return label
+    }()
+    
+    private lazy var showStatusButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Show Status", for: .normal)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.backgroundColor = .blue
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 4
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+      
+        return button
+    }()
+    
+    @objc func buttonPressed() {
+        print("статус")
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageView)
         addSubview(nameLabel)
+        addSubview(nameLabel2)
+        addSubview(showStatusButton)
     }
     
     required init?(coder: NSCoder) {
@@ -39,5 +71,11 @@ class ProfileHeaderView: UIView {
         imageView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
         nameLabel.frame = CGRect(x: imageView.frame.maxX + 16,
                                  y: 27, width: self.bounds.width - imageView.frame.width - 32 , height: 32)
+        nameLabel2.frame = CGRect(x: imageView.frame.maxX + 16,
+                                  y: imageView.frame.height,
+                                  width: self.bounds.width - imageView.frame.width - 32 ,
+                                  height: 32)
+        
+        showStatusButton.frame = CGRect(x: 16, y: imageView.frame.height + 32 , width: self.bounds.width - 32 , height: 50)
     }
 }
