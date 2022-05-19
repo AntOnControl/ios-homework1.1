@@ -39,7 +39,8 @@ class ProfileHeaderView: UIView {
         button.setTitle("Show Status", for: .normal)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.backgroundColor = .blue
-        button.layer.masksToBounds = true
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
@@ -72,10 +73,9 @@ class ProfileHeaderView: UIView {
         nameLabel.frame = CGRect(x: imageView.frame.maxX + 16,
                                  y: 27, width: self.bounds.width - imageView.frame.width - 32 , height: 32)
         nameLabel2.frame = CGRect(x: imageView.frame.maxX + 16,
-                                  y: imageView.frame.height,
+                                  y: imageView.frame.height - 18,
                                   width: self.bounds.width - imageView.frame.width - 32 ,
                                   height: 32)
-        
         showStatusButton.frame = CGRect(x: 16, y: imageView.frame.height + 32 , width: self.bounds.width - 32 , height: 50)
     }
 }
