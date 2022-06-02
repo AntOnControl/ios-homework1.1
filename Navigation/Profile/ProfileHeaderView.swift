@@ -9,25 +9,28 @@ import UIKit
 
 class ProfileHeaderView: UIView {
 
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "Tiger"))
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 50
-        imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
-        return imageView
+    private lazy var avatarImageView: UIImageView = {
+        let avatarImageView = UIImageView(image: UIImage(named: "Tiger"))
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = 50
+        avatarImageView.layer.borderWidth = 3
+        avatarImageView.layer.borderColor = UIColor.white.cgColor
+        return avatarImageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hipster Cat"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = UIColor.black
         return label
     }()
     
-    private lazy var nameLabel2: UILabel = {
+    private lazy var statusLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Waiting for something..."
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
@@ -36,6 +39,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var showStatusButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Show Status", for: .normal)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         button.backgroundColor = .blue
@@ -50,6 +54,17 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+    private lazy var downButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Down Button", for: .normal)
+        button.backgroundColor = .darkGray
+        button.clipsToBounds = true
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
     @objc func buttonPressed() {
         print("статус")
     }
@@ -57,25 +72,37 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(imageView)
-        addSubview(nameLabel)
-        addSubview(nameLabel2)
+        addSubview(avatarImageView)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
         addSubview(showStatusButton)
+        addSubview(downButton)
+        
+        NSLayoutConstraint.activate([
+            avatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            fullNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 27),
+            fullNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            statusLabel.topAnchor.constraint(equalTo: topAnchor, constant: 84),
+            statusLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            showStatusButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            showStatusButton.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 132),
+            showStatusButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            downButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            downButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            downButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        imageView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
-        nameLabel.frame = CGRect(x: imageView.frame.maxX + 16,
-                                 y: 27, width: self.bounds.width - imageView.frame.width - 32 , height: 32)
-        nameLabel2.frame = CGRect(x: imageView.frame.maxX + 16,
-                                  y: imageView.frame.height - 18,
-                                  width: self.bounds.width - imageView.frame.width - 32 ,
-                                  height: 32)
-        showStatusButton.frame = CGRect(x: 16, y: imageView.frame.height + 32 , width: self.bounds.width - 32 , height: 50)
     }
 }
