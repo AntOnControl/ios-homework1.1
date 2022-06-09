@@ -33,13 +33,17 @@ class FeedViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout()
+    }
+    
+    private func layout() {
         title = "Feed"
         view.backgroundColor = .systemMint
         view.addSubview(feedStackView)
         NSLayoutConstraint.activate([
             feedStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             feedStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ]) 
+        ])
     }
     
     @objc func openPost() {

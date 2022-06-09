@@ -34,10 +34,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabbar = UITabBarController()
         let nc1 = UINavigationController(rootViewController: FeedViewController())
         nc1.tabBarItem.title = "Feed"
-        nc1.tabBarItem.image = UIImage(systemName: "pencil.and.outline")
-        let nc2 = UINavigationController(rootViewController: ProfileViewController())
+        nc1.tabBarItem.image = UIImage(systemName: "house")
+        //let nc2 = UINavigationController(rootViewController: ProfileViewController())
+        let nc2 = UINavigationController(rootViewController: LogInViewController())
+        
         nc2.tabBarItem.title = "Profile"
-        nc2.tabBarItem.image = UIImage(systemName: "star")
+        nc2.tabBarItem.image = UIImage(systemName: "person")
         tabbar.viewControllers = [nc1,nc2]
         window?.rootViewController = tabbar
         window?.makeKeyAndVisible()

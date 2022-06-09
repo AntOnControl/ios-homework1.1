@@ -23,7 +23,9 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        layout()
+    }
+    private func layout() {
         title = post.title
         view.backgroundColor = .systemCyan
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(showInfo))
