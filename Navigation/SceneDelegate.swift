@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             tabBarAppearance.configureWithDefaultBackground()
             UITabBar.appearance().standardAppearance = tabBarAppearance
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-     }
+        }
         
         if #available(iOS 15.0, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
@@ -37,12 +37,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         nc1.tabBarItem.image = UIImage(systemName: "house")
         //let nc2 = UINavigationController(rootViewController: ProfileViewController())
         let nc2 = UINavigationController(rootViewController: LogInViewController())
-        
         nc2.tabBarItem.title = "Profile"
         nc2.tabBarItem.image = UIImage(systemName: "person")
         tabbar.viewControllers = [nc1,nc2]
         window?.rootViewController = tabbar
         window?.makeKeyAndVisible()
+       
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

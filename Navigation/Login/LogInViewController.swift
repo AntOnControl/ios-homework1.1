@@ -12,6 +12,7 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .green
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = true
+        //navigationController?.tabBarController?.tabBar.isHidden = true
     }
 }
