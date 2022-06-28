@@ -1,9 +1,4 @@
-//
-//  LogInViewController.swift
-//  Navigation
-//
-//  Created by Anton Utin on 09.06.2022.
-//
+
 
 import UIKit
 
@@ -17,15 +12,6 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
         layout()
-//        //navigationController?.tabBarController?.tabBar.isHidden = true
-//        let subLayer = CALayer()
-//        subLayer.backgroundColor = UIColor.red.cgColor
-//        subLayer.shadowOffset = CGSize(width: 0.0, height: 0.3)
-//        subLayer.shadowRadius = 5.0
-//        subLayer.shadowOpacity = 0.8
-//        subLayer.frame = CGRect(x: 10, y: 10, width: 300, height: 300)
-//        view.layer.addSublayer(subLayer)
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -33,6 +19,7 @@ class LogInViewController: UIViewController {
         
     }
     
+// подключение Клавиатуры
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -54,21 +41,25 @@ class LogInViewController: UIViewController {
         scrollView.contentInset = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
+//
     
     private func layout() {
+        //[imageLogo,buttonLogIn,inputTextLogin,inputTextPassword,stackView].forEach {contentView.addSubview($0)}
         
         contentView.addSubview(imageLogo)
         contentView.addSubview(buttonLogIn)
         contentView.addSubview(inputTextLogin)
         contentView.addSubview(inputTextPassword)
+        contentView.addSubview(stackView)
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         setupConstraints()
-        //view.layer.addSublayer(subLayer) //тест слоев
     }
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.backgroundColor = .white
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -90,70 +81,74 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var buttonLogIn: UIButton = {
-        let logIn = UIButton()
-        let bgImageNormal = UIImage(named: "blue_pixel")
+        let bgImageNormal = UIImage(named: "blue_pixel")!.alpha(1)
         
+        let imgSelected = UIImage(named: "blue_pixel")!.alpha(0.8)
+        let imgHighligted = UIImage(named: "blue_pixel")!.alpha(0.8)
+        let imgDesabled = UIImage(named: "blue_pixel")!.alpha(0.8)
+        
+        let logIn = UIButton()
         logIn.setBackgroundImage(bgImageNormal, for: .normal)
+        logIn.setBackgroundImage(imgSelected, for: .selected)
+        logIn.setBackgroundImage(imgHighligted, for: .highlighted)
+        logIn.setBackgroundImage(imgDesabled, for: .disabled)
+      
+        
         logIn.setTitle("Log In", for: .normal)
-        //bgImage.alpha = 0.8
-        logIn.layer.cornerRadius = 50
+        logIn.layer.cornerRadius = 10
         logIn.titleLabel?.textColor = .black
         logIn.translatesAutoresizingMaskIntoConstraints = false
+        logIn.clipsToBounds = true
         return logIn
     }()
     private lazy var inputTextLogin: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email of phone"
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.textColor = .black
-        textField.backgroundColor = .systemGray6
-        textField.delegate = self
-        //textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
-        //textField.clipsToBounds = true
+        textField.textColor = .black
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.tintColor
+        textField.indent(size: 10)
+        textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+        textField.delegate = self
         return textField
     }()
     private lazy var inputTextPassword: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Password"
-        textField.backgroundColor = .systemGray6
-        textField.delegate = self
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 0.5
-        textField.layer.cornerRadius = 10
-        textField.clipsToBounds = true
+        textField.textColor = .black
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.tintColor
+        textField.indent(size: 10)
+        textField.autocapitalizationType = .none
+        textField.backgroundColor = .systemGray6
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         
         return textField
     }()
-    /*
-    private lazy var subLayer: CALayer = {
-    subLayer.backgroundColor = UIColor.red.cgColor
-    subLayer.shadowOffset = CGSize(width: 0.0, height: 0.3)
-    subLayer.shadowRadius = 5.0
-    subLayer.shadowOpacity = 0.8
-    subLayer.frame = CGRect(x: 10, y: 10, width: 300, height: 300)
-    return subLayer
-    }()
-     */
- /*
-    private lazy var view1: UIView = {
-        view1 = UIView()
-        view1.backgroundColor = .red
-        view1.translatesAutoresizingMaskIntoConstraints = false
-        return view1
-    }()
     
-    private lazy var scrollView1: UIScrollView = {
-        scrollView1 = UIScrollView(frame: CGRect(x: 10, y: 10, width: view.frame.size.width - 20, height: view.frame.size.height - 20))
-        scrollView1.backgroundColor = .green
-        return scrollView1
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [inputTextLogin, inputTextPassword])
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.backgroundColor = .red
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.cornerRadius = 10
+        stackView.spacing = 10
+        stackView.backgroundColor = .systemGray6
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.layer.masksToBounds = true
+        return stackView
     }()
-   */
     
    
     private func setupConstraints() {
@@ -162,32 +157,31 @@ class LogInViewController: UIViewController {
             imageLogo.widthAnchor.constraint(equalToConstant: 100),
             imageLogo.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageLogo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-           // imageLogo.topAnchor.constraint(equalTo: (view1.centerYAnchor)),
-           // imageLogo.topAnchor.constraint(equalToSystemSpacingBelow: view.centerYAnchor, multiplier: 0.3),
-           // imageLogo.topAnchor.constraint(equalTo: topAnchor, constant: 160),
-           // imageLogo.topAnchor.constraint(equalTo: topAn, constant: 400),
             
-            inputTextLogin.topAnchor.constraint(equalTo: imageLogo.bottomAnchor, constant: 120),
-            inputTextLogin.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            inputTextLogin.topAnchor.constraint(equalTo: stackView.topAnchor),
+            inputTextLogin.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
             inputTextLogin.heightAnchor.constraint(equalToConstant: 50),
-            inputTextLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            inputTextLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
+            inputTextLogin.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            inputTextLogin.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+
             inputTextPassword.topAnchor.constraint(equalTo: inputTextLogin.bottomAnchor),
-            inputTextPassword.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            inputTextPassword.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
             inputTextPassword.heightAnchor.constraint(equalToConstant: 50),
-            inputTextPassword.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            inputTextPassword.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            inputTextPassword.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            inputTextPassword.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            
+            stackView.topAnchor.constraint(equalTo: imageLogo.bottomAnchor, constant: 120),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.heightAnchor.constraint(equalToConstant: 100),
             
 
-            buttonLogIn.topAnchor.constraint(equalTo: inputTextPassword.bottomAnchor, constant: 16),
+            buttonLogIn.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             buttonLogIn.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             buttonLogIn.heightAnchor.constraint(equalToConstant: 50),
             buttonLogIn.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             buttonLogIn.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            buttonLogIn.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            
-            
+            buttonLogIn.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -209,5 +203,26 @@ extension LogInViewController: UISearchTextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
+    }
+}
+
+
+// UIImage+Alpha.swift
+
+extension UIImage {
+
+    func alpha(_ value:CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
+}
+
+extension UITextField {
+    func indent(size:CGFloat) {
+        self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
+        self.leftViewMode = .always
     }
 }
