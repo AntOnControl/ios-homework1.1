@@ -88,6 +88,7 @@ class LogInViewController: UIViewController {
         let imgDesabled = UIImage(named: "blue_pixel")!.alpha(0.8)
         
         let logIn = UIButton()
+        logIn.addTarget(self, action: #selector(pressedLogin), for: .touchUpInside)
         logIn.setBackgroundImage(bgImageNormal, for: .normal)
         logIn.setBackgroundImage(imgSelected, for: .selected)
         logIn.setBackgroundImage(imgHighligted, for: .highlighted)
@@ -101,6 +102,10 @@ class LogInViewController: UIViewController {
         logIn.clipsToBounds = true
         return logIn
     }()
+    @objc private func pressedLogin() {
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
     private lazy var inputTextLogin: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email of phone"
