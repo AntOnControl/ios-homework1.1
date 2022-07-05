@@ -113,7 +113,6 @@ class LogInViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.tintColor
         textField.indent(size: 10)
         textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +126,6 @@ class LogInViewController: UIViewController {
         textField.layer.borderWidth = 0.5
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16)
-        textField.tintColor
         textField.indent(size: 10)
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray6

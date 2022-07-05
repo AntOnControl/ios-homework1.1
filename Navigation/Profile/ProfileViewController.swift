@@ -11,6 +11,11 @@ class ProfileViewController: UIViewController{
     
     let modelPost = ModelPost.createModelPost()
    
+    private lazy var profileHeaderView: ProfileHeaderView = {
+       let profileHeaderView = ProfileHeaderView()
+        return profileHeaderView
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
@@ -29,13 +34,26 @@ class ProfileViewController: UIViewController{
     private func layout(){
         view.addSubview(tableView)
         
+        title = "Profile"
+        view.backgroundColor = .lightGray
+        //profileHeaderView.backgroundColor = .green
+        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(profileHeaderView)
+        
     }
+    
     private func setupNS() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        NSLayoutConstraint.activate([
+            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220)
         ])
     }
 }
@@ -52,7 +70,7 @@ extension ProfileViewController: UITableViewDataSource {
 //        cell.contentConfiguration = content
 //        return cell
         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-                                                 
+        cell.setupCell(model: modelPost[indexPath.row])
     return cell
     }
     

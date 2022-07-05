@@ -26,19 +26,59 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func customizeCell() {
-        contentView.backgroundColor = .systemGray3
+    func setupCell(model:ModelPost) {
+        postImageView.image = UIImage(named: model.image)
+        postText.text = model.author
     }
     
+    private func customizeCell() {
+        contentView.backgroundColor = .systemGray3
+        contentViewPost.layer.cornerRadius = 10
+        contentViewPost.layer.borderColor = UIColor.black.cgColor
+        contentViewPost.layer.borderWidth = 2
+    }
+    
+    private let postImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .red
+        return imageView
+    }()
+    
+    private let postText: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        //label.text = "Text"
+        return label
+    }()
+    
     private func layout(){
-        contentView.addSubview(contentViewPost)
+        [contentViewPost, postImageView, postText].forEach { contentView.addSubview($0)}
+        
+        let heightView: CGFloat = 100
+        let viewInset: CGFloat = 8
+        let imageInset: CGFloat = 10
         
         NSLayoutConstraint.activate([
-            contentViewPost.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            contentViewPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            contentViewPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            contentViewPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -8),
-            contentViewPost.heightAnchor.constraint(equalToConstant: 40)
+            contentViewPost.topAnchor.constraint(equalTo: contentView.topAnchor, constant: viewInset),
+            contentViewPost.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: viewInset),
+            contentViewPost.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -viewInset),
+            contentViewPost.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -viewInset),
+            contentViewPost.heightAnchor.constraint(equalToConstant: heightView)
+        ])
+        
+        NSLayoutConstraint.activate([
+            postImageView.topAnchor.constraint(equalTo: contentViewPost.topAnchor, constant: imageInset),
+            postImageView.leadingAnchor.constraint(equalTo: contentViewPost.leadingAnchor, constant: imageInset),
+            postImageView.heightAnchor.constraint(equalToConstant: heightView - imageInset * 2),
+            postImageView.widthAnchor.constraint(equalToConstant: heightView - imageInset * 2),
+        ])
+        NSLayoutConstraint.activate([
+            postText.topAnchor.constraint(equalTo: contentViewPost.topAnchor, constant: imageInset),
+            postText.leadingAnchor.constraint(equalTo: postImageView.trailingAnchor, constant: viewInset),
+            postText.trailingAnchor.constraint(equalTo: contentViewPost.trailingAnchor)
+        
         ])
     }
 }
