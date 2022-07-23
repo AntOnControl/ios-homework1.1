@@ -2,12 +2,12 @@
 //  AppDelegate.swift
 //  Navigation
 //
-//  Created by Anton Utin on 18.05.2022.
+//  Created by Anton Utin on 09.05.2022.
 //
 
 import UIKit
 
-@main
+ @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 

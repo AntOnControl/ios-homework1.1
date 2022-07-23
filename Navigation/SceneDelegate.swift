@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Navigation
 //
-//  Created by Anton Utin on 18.05.2022.
+//  Created by Anton Utin on 09.05.2022.
 //
 
 import UIKit
@@ -13,10 +13,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        if #available(iOS 15.0, *) {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
+        
+        if #available(iOS 15.0, *) {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithDefaultBackground()
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        }
+        
+        window = .init(windowScene: windowScene)
+        let tabbar = UITabBarController()
+        let nc1 = UINavigationController(rootViewController: FeedViewController())
+        nc1.tabBarItem.title = "Feed"
+        nc1.tabBarItem.image = UIImage(systemName: "house")
+        //let nc2 = UINavigationController(rootViewController: ProfileViewController())
+        let nc2 = UINavigationController(rootViewController: LogInViewController())
+        nc2.tabBarItem.title = "Profile"
+        nc2.tabBarItem.image = UIImage(systemName: "person")
+        tabbar.viewControllers = [nc1,nc2]
+        window?.rootViewController = tabbar
+        window?.makeKeyAndVisible()
+       
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
